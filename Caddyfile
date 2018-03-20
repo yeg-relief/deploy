@@ -18,7 +18,7 @@ localhost:80,
   }
 
   basicauth /protected {$ADMIN_USERNAME} {$ADMIN_PASSWORD}
-  basicauth /data {$DATA_USERNAME} {$DATA_PASSWORD}
+  basicauth /data {$ADMIN_USERNAME} {$ADMIN_PASSWORD}
   basicauth /elastic {$ELASTIC_USERNAME} {$ELASTIC_PASSWORD}
 
   rewrite /home to /index.html
