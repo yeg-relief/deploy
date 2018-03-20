@@ -1,0 +1,43 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      args:
+        - BRANCH=v0.2
+        - CACHEBUST=2
+    ports:
+      - ${API_PORT}:${API_PORT}
+    volumes:
+      - api-log:/var/log
+      - api-sqlite:/var/sqlite
+    env_file:
+      - ./.env
+    links:
+      - elasticsearch
+  caddy:
+    image: zzrot/alpine-caddy
+    ports:
+      - ${CADDY_PORT}:${CADDY_PORT}
+      - 80:80
+      - 443:443
+    volumes:
+      - ./Caddyfile:/etc/Caddyfile
+    env_file:
+      - ./.env
+    links:
+      - elasticsearch
+      - web
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.1
+    ports:
+      - ${ELASTICSEARCH_PORT}:${ELASTICSEARCH_PORT}
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+
+volumes:
+  api-log:
+  api-sqlite:
+  es-data:
