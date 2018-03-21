@@ -5,7 +5,7 @@ services:
       context: .
       args:
         - BRANCH=v0.2
-        - CACHEBUST=2
+        - CACHEBUST=4
     ports:
       - ${API_PORT}:${API_PORT}
     volumes:

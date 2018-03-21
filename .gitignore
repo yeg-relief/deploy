@@ -1,2 +1,5 @@
 .env
 .idea/
+/volumes/api-log/youcanbenefit/form_results/*.json
+/volumes/api-log/youcanbenefit/form_submission/*.json
+/volumes/es-data/nodes/
